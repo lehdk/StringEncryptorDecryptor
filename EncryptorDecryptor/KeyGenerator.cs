@@ -8,7 +8,7 @@ internal class KeyGenerator
     public byte[] CreateKey(string password, int keyBytes = 32)
     {
         const int Iterations = 300;
-        var keyGenerator = new Rfc2898DeriveBytes(password, Salt, Iterations);
+        var keyGenerator = new Rfc2898DeriveBytes(password, Salt, Iterations, HashAlgorithmName.SHA512);
         return keyGenerator.GetBytes(keyBytes);
     }
 }
