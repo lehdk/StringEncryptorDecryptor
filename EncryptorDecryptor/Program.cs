@@ -60,9 +60,15 @@ public sealed class Program
 
             string cipher = File.ReadAllText(path);
             var decrypter = new Decryptor();
-            var result = decrypter.Decrypt(cipher, password);
 
-            Console.WriteLine("The decrypted message:\n" + result);
+            try
+            {
+                var result = decrypter.Decrypt(cipher, password);
+                Console.WriteLine("The decrypted message:\n" + result);
+            } catch(Exception _)
+            {
+                Console.WriteLine("Wrong password!");
+            }
         }
     }
 
