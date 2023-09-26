@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace EncryptorDecryptor;
+namespace EncryptorDecryptor.Security;
 
 public sealed class Encryptor
 {

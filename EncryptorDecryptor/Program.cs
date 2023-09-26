@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+﻿using EncryptorDecryptor.Security;
 
 namespace EncryptorDecryptor;
 
@@ -42,10 +42,15 @@ public sealed class Program
             var encryptor = new Encryptor();
             var result = encryptor.Encrypt(toEncrypt, password);
 
-            using (var output = new StreamWriter("Encrypted.txt"))
+            string path = Path.GetFullPath("Encrypted.txt");
+
+            using (var output = new StreamWriter(path))
             {
                 output.Write(result);
             }
+
+            Console.WriteLine($"File written to\n{path}");
+
         } else // Decrypt
         {
             Console.WriteLine("Please give the path to the file you want to decrypt");
@@ -81,20 +86,20 @@ public sealed class Program
         {
             keyInfo = Console.ReadKey(true);
 
-            if(keyInfo.Key != ConsoleKey.Enter)
-            {
-                if(keyInfo.Key == ConsoleKey.Backspace)
-                {
-                    if (password.Length == 0)
-                        continue;
+            if (keyInfo.Key == ConsoleKey.Enter)
+                continue;
 
-                    password = password.Substring(0, password.Length - 1);
-                    Console.Write("\b \b");
-                } else
-                {
-                    password += keyInfo.KeyChar;
-                    Console.Write("*");
-                }
+            if(keyInfo.Key == ConsoleKey.Backspace)
+            {
+                if (password.Length == 0)
+                    continue;
+
+                password = password.Substring(0, password.Length - 1);
+                Console.Write("\b \b");
+            } else
+            {
+                password += keyInfo.KeyChar;
+                Console.Write("*");
             }
         } while (keyInfo.Key != ConsoleKey.Enter);
 
