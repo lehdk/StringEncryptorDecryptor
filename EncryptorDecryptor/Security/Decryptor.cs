@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using EncryptorDecryptor.Constants;
 
 namespace EncryptorDecryptor;
 
@@ -15,11 +16,11 @@ public sealed class Decryptor
     {
         byte[] buffer = Convert.FromBase64String(cipher);
 
-        var iv = new byte[16];
-        Array.Copy(buffer, 0, iv, 0, 16);
+        var iv = new byte[AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE];
+        Array.Copy(buffer, 0, iv, 0, AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE);
 
-        var cipherBytes = new byte[buffer.Length - 16];
-        Array.Copy(buffer, 16, cipherBytes, 0, cipherBytes.Length);
+        var cipherBytes = new byte[buffer.Length - AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE];
+        Array.Copy(buffer, AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE, cipherBytes, 0, cipherBytes.Length);
 
         using (var aes = Aes.Create())
         {

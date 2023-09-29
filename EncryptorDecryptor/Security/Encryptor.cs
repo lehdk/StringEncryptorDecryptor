@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using EncryptorDecryptor.Constants;
 
 namespace EncryptorDecryptor.Security;
 
@@ -15,7 +16,7 @@ public sealed class Encryptor
 
     public string Encrypt(string plainText, string password)
     {
-        byte[] iv = new byte[16];
+        byte[] iv = new byte[AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE];
         _random.NextBytes(iv);
 
         byte[] array;
