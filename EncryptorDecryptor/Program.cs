@@ -70,13 +70,17 @@ public sealed class Program
             {
                 var result = decrypter.Decrypt(cipher, password);
                 Console.WriteLine("The decrypted message:\n" + result);
-            } catch(Exception _)
+            } catch(Exception)
             {
                 Console.WriteLine("Wrong password!");
             }
         }
     }
 
+    /// <summary>
+    /// Reads a password from the console and masks the letters typed with an *
+    /// </summary>
+    /// <returns>Returns the password typed in by the user as plain text</returns>
     public static string ReadPasswordMasked()
     {
         string password = string.Empty;
