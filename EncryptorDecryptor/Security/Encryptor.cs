@@ -14,6 +14,12 @@ public sealed class Encryptor
         _random = new Random();
     }
 
+    /// <summary>
+    /// Encrypts the given text with aes.
+    /// </summary>
+    /// <param name="plainText">The text to be encrypted</param>
+    /// <param name="password">The password used by the encryption algorithm</param>
+    /// <returns>Returns the cipher as base64-string</returns>
     public string Encrypt(string plainText, string password)
     {
         byte[] iv = new byte[AppConstants.INITIALIZATION_VECTOR_BYTE_SIZE];
@@ -39,7 +45,7 @@ public sealed class Encryptor
                 }
             }
         }
-
+        
         var res = iv.Concat(array).ToArray();
 
         return Convert.ToBase64String(res);

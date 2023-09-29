@@ -11,7 +11,12 @@ public sealed class Decryptor
     {
         _keyGenerator = new KeyGenerator();
     }
-
+    /// <summary>
+    /// Decrypts a cipher text using the provided password.
+    /// </summary>
+    /// <param name="cipher">The cipher text to decrypt, in Base64.</param>
+    /// <param name="password">The password used for decryption.</param>
+    /// <returns>The decrypted plaintext as a string.</returns>
     public string Decrypt(string cipher, string password)
     {
         byte[] buffer = Convert.FromBase64String(cipher);
