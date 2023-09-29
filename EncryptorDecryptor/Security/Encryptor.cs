@@ -5,15 +5,19 @@ namespace EncryptorDecryptor.Security;
 public sealed class Encryptor
 {
     private readonly KeyGenerator _keyGenerator;
+    private readonly Random _random;
 
     public Encryptor()
     {
         _keyGenerator = new KeyGenerator();
+        _random = new Random();
     }
 
     public string Encrypt(string plainText, string password)
     {
         byte[] iv = new byte[16];
+        _random.NextBytes(iv);
+
         byte[] array;
 
         using (var aes = Aes.Create())
@@ -35,6 +39,8 @@ public sealed class Encryptor
             }
         }
 
-        return Convert.ToBase64String(array);
+        var res = iv.Concat(array).ToArray();
+
+        return Convert.ToBase64String(res);
     }
 }
